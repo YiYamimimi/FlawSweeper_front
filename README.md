@@ -60,6 +60,11 @@ npm run build
 ```
 npm run lint
 ```
+###运行结果
+![登录](https://pic.imgdb.cn/item/64cb19dd1ddac507ccee106b.jpg)
+![效果图](https://pic.imgdb.cn/item/64cb1a0a1ddac507ccee9636.jpg)
+![效果图](https://pic.imgdb.cn/item/64cb199d1ddac507cced1e76.jpg)
+![效果图](https://pic.imgdb.cn/item/64cb1a4f1ddac507ccef5258.jpg)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
