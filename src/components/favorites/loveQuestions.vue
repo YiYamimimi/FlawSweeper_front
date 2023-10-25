@@ -9,7 +9,6 @@
             v-model="value"
             placeholder="请选择搜索类型"
             @change="getValue($event)"
-            style="width: 160px"
         >
           <el-option
               v-for="item in options"

@@ -57,6 +57,7 @@ export default {
         username: "",
         pass: "",
       },
+      //trigger: "blur" ： 表失焦的时候做判断
       rules: {
         username: [{ validator: validateusername, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }],

@@ -1,22 +1,22 @@
 <template>
-  <div :class="className" :style="{ height: height, width: width }" />
+  <div style="height:350px;width:100% " />
 </template>
 
 <script>
 export default {
   props: {
-    className: {
-      type: String,
-      default: "chart",
-    },
-    width: {
-      type: String,
-      default: "100%",
-    },
-    height: {
-      type: String,
-      default: "350px",
-    },
+    // className: {
+    //   type: String,
+    //   default: "chart",
+    // },
+    // width: {
+    //   type: String,
+    //   default: "100%",
+    // },
+    // height: {
+    //   type: String,
+    //   default: "350px",
+    // },
     // 父组件传递过来的图表数据
     chartData: {
       type: Object,
@@ -35,6 +35,8 @@ export default {
       deep: true,
       handler(val) {
         this.setOptions(val);
+        console.log("val",val);
+
       },
     },
   },
@@ -64,7 +66,7 @@ export default {
       });
     },
     setOptions({ bardata } = {}) {
-      // console.log(bardata);
+      console.log("bardata",bardata);
       this.chart.setOption({
         title: {},
         tooltip: {},
@@ -87,6 +89,7 @@ export default {
                 //这里是重点
                 color: function (params) {
                   var colorList = ["#61a0a8", "#ff7070", "#2f4554"];
+                  // console.log("params.dataIndex:",params.dataIndex);
                   return colorList[params.dataIndex];
                 },
               },

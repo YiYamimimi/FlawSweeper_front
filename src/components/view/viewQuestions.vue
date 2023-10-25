@@ -1,5 +1,12 @@
+<!-- 错题详情页 -->
 <template >
   <div class="tutu">
+    <router-link
+      :to="{ path: '/questionIndex', query: { id: question.classifyid } }"
+    >
+      <el-button id="back" icon="el-icon-arrow-left" ></el-button>
+    </router-link>
+
     <el-row>
       <!-- 第一个卡片（科目，标签，日期） -->
       <el-card class="box-cardmini">
@@ -135,6 +142,7 @@ export default {
   },
 
   methods: {
+    
     subject(subjectname) {
       if (subjectname == "1") {
         return "数学";
@@ -238,7 +246,14 @@ html {
   overflow: hidden;
   background-size: cover;
 }
+#back {
+  /* justify-content: center; */
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 25px;
 
+  background-color: #ffffff00;
+}
 .titles {
   font-family: STXingkai;
   font-size: 30px;

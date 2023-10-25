@@ -76,7 +76,7 @@ export default {
       return dateArray;
     },
     getChartData(result) {
-      console.log(result);
+      console.log("result",result);
       //柱状图
       this.chartData.barChartData.bardata = result.barddata;
       //折线图
@@ -88,7 +88,7 @@ export default {
       ] = result.linedata;
       this.chartData.lineChartData.days = this.getSevenDate();
       //饼图
-      this.chartData.pieChartData.piedata = result.piedata;
+      this.chartData.pieChartData.piedata = result.piedata;//[1,2,3,4]
     },
   },
 

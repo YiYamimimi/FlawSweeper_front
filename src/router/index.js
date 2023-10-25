@@ -30,6 +30,12 @@ export default new VueRouter({
           component: () => import('../components/home/index.vue'),
         },
         {
+          path: '/homepage/',
+          name: 'page',
+          component: () => import('../components/home/homePage.vue'),
+        },
+       
+        {
           path: '/index/addquestions',
           name: 'addquestions',
           component: () => import('../views/addView.vue'),

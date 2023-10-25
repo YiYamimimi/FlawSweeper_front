@@ -64,10 +64,10 @@ export default {
       });
     },
     setOptions({ piedata } = {}) {
-      // console.log(piedata);
+      // console.log("从父组件传过来的chardate里选择一个数据： piedata",piedata[1],piedata[2],piedata[3]);
       this.chart.setOption({
         tooltip: {
-          trigger: "item",
+          trigger: "item",//这一行写与不写都可以
         },
         legend: {
           orient: "vertical",
@@ -78,7 +78,10 @@ export default {
             type: "pie",
             radius: "50%",
             data: [
-              { value: piedata[0], name: "数学" },
+              { 
+                value: piedata[0],
+                 name: "数学" 
+              },
               { value: piedata[1], name: "英语" },
               { value: piedata[2], name: "政治" },
               { value: piedata[3], name: "专业课" },
@@ -87,7 +90,7 @@ export default {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
+                // shadowColor: "rgba(0, 0, 0, 0.5)",
               },
             },
           },

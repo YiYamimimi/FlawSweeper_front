@@ -1,23 +1,20 @@
 <template>
-  <div :class="className" :style="{ height: height, width: width }" />
+  <div style="height: 400px;width: 100% " />
 </template>
 
 <script>
 
 export default {
   props: {
-    className: {
-      type: String,
-      default: "chart",
-    },
-    width: {
-      type: String,
-      default: "100%",
-    },
-    height: {
-      type: String,
-      default: "400px",
-    },
+    
+    // width: {
+    //   type: String,
+    //   default: "100%",
+    // },
+    // height: {
+    //   type: String,
+    //   default: "400px",
+    // },
     // 父组件传递过来的图表数据
     chartData: {
       type: Object,
@@ -40,7 +37,11 @@ export default {
     },
   },
   mounted() {
-    /* 图表初始化 */
+    // /* 图表初始化 */
+    /*使用 $nextTick 是因为在 Vue 的响应式系统中，
+    更新数据可能不会立即反映在 DOM 上，而是在下一个 DOM 更新循环中进行。
+    因此，如果你希望在数据更新后执行一些与 DOM 相关的操作，
+    最好将这些操作放在 $nextTick 的回调函数中，以确保在更新循环结束后执行*/
     this.$nextTick(() => {
       this.initChart();
     });
@@ -68,12 +69,8 @@ export default {
       // console.log(days);
       this.chart.setOption({
         title: {},
-        tooltip: {
-          trigger: "axis",
-        },
-        legend: {
-          data: ["数学", "英语", "政治", "专业课"],
-        },
+        tooltip: {},
+        legend: {},
         xAxis: {
           type: "category",
           name: "日期",

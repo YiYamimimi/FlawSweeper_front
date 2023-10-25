@@ -37,20 +37,48 @@ export default {
   data() {
     return {
       subjectList: [],
+      subjectList1: [
+        {
+            "classifyid": 1,
+            "classifyname": "数学",
+            "datacount": 7
+        },
+        {
+            "classifyid": 2,
+            "classifyname": "英语",
+            "datacount": 23
+        },
+        {
+            "classifyid": 3,
+            "classifyname": "政治",
+            "datacount": 7
+        },
+        {
+            "classifyid": 4,
+            "classifyname": "专业课",
+            "datacount": 7
+        }
+    ],
       picture: "https://pic36.photophoto.cn/20150709/0005018723474601_b.jpg",
     };
   },
   created() {
+    console.log(11111);
+
     this.$axios
       .get("/question/selectbyclassify")
       .then((res) => {
         console.log(res);
         this.subjectList = res.data.data;
+        console.log(this.subjectList);
       })
       .catch((err) => {
         console.log(err);
       });
+      this.subjectList= this.subjectList1
+      console.log(this.subjectList);
   },
+
   methods: {
     brief1(total) {
       return total;
