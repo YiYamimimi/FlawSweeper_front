@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="bigest_box">
+  <div class="bg">
     <el-card class="card_box">
       <el-container>
         <el-header>
@@ -46,26 +46,39 @@ html {
   padding: 0;
 }
 
-.bigest_box {
+.bg {
   min-height: 100vh;
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
   /* align-items: center; */
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-  background: url("/src/assets/img/login_background.jpg") no-repeat;
-  background-size: cover;
-}
+        }
+        .bg::before{         
+          content:'';
+          background: url('/src/assets/img/login_background.jpg') no-repeat;
+          background-size:cover;
+          filter: blur(5px);
+          position: absolute;
+          top:0;
+          bottom:0;
+          left:0;
+          right:0;
+          z-index: -1;
+        }
+
+
 
 .el-header h1 {
   text-align: center;
 }
 .card_box {
   width: 600px;
-  margin-top: 320px;
+  z-index:2;
   /* 半透明 */
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.834);
 }
 
 .el-footer {

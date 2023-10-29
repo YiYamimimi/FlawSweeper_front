@@ -19,6 +19,11 @@ export default new VueRouter({
       component: () => import('../components/login/Register.vue')
     },
     {
+      path: "/repeating",
+      name: 'repeating',
+      component: () => import('../components/Repeat/Repeating.vue')
+    },
+    {
       path: '/index',
       redirect: '/index/',
       name: 'index',
@@ -34,7 +39,7 @@ export default new VueRouter({
           name: 'page',
           component: () => import('../components/home/homePage.vue'),
         },
-       
+
         {
           path: '/index/addquestions',
           name: 'addquestions',

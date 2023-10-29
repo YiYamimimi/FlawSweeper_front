@@ -11,11 +11,11 @@ export default {
     },
     width: {
       type: String,
-      default: "100%",
+      default: "400px",
     },
     height: {
       type: String,
-      default: "350px",
+      default: "290px",
     },
     // 父组件传递过来的图表数据
     chartData: {

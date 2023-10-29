@@ -74,10 +74,10 @@ export default {
           data: ["错题本", "收藏夹", "回收站"],
         },
         xAxis: {
-          data: ["错题本", "收藏夹", "回收站"],
+         name: "错题数",
         },
         yAxis: {
-          name: "错题数",
+          data: ["错题本", "收藏夹", "回收站"],
         },
         series: [
           {

@@ -1,104 +1,107 @@
 <!--  -->
 <template>
-  <el-card class="box-card">
-    <div class="contentShow">
-      <router-link
-        :to="{
-          name: 'viewquestion',
-          query: { id: question.questionid },
-        }"
-      >
+  <el-card class="box-card1">
+  
+      <div >
         <!-- 学科类型和题目 -->
-        <p>
-          <el-tag class="subjectTag" :type="subjectStyle(classifyidToShow)">
+  
+         
+        <div class="centerShow"> 
+          <el-tag class="tagShow" :type="subjectStyle(classifyidToShow)">
             {{ classifyidToShow }}
           </el-tag>
-          {{ brief(question.title1) }}
-        </p>
-      </router-link>
-    </div>
-    <!-- 题型分类和时间 -->
-    <div class="centerShow">
-      <div class="centerItem tixing">
-        {{ typeShow }}
+          <div class="centerItem ">
+            {{ typeShow }}
+          </div>
+          <div class="centerItem">
+            
+  
+            <div class="el-icon-time">{{ TimeShow }}</div>  
+          </div>
+          <div class="centerItem"><el-tooltip class="item" effect="dark" content="点击查看图片" placement="top">
+            <i v-if="question.imagesrc.length > 1" @click="showPho()" class="el-icon-zoom-in"></i></el-tooltip>
+          </div>
+          <div  class="centerItemright">
+            <el-rate
+            
+              style="margin-left: 10px; display: block;"
+              :value="question.proficiency"
+              show-text
+              :texts="this.texts"
+              disabled
+            >
+            </el-rate>
+          </div>
+        </div>
+        <router-link
+      :to="{
+        name: 'viewquestion',
+        query: { id: question.questionid },
+      }"
+    >  
+        <div class="contentShow" style="height: 70px;line-height: 70px;font-size: 25px; "> {{ brief(question.title1) }}</div>
+      </router-link>  
       </div>
-      <div class="centerItem">
-        <div class="el-icon-time">{{ TimeShow }}</div>
-      </div>
-      <div>
-        <el-rate
-          class="centerItem"
-          style="margin-left: 10px"
-          :value="question.proficiency"
-          show-text
-          :texts="this.texts"
-          disabled
-        >
-        </el-rate>
-      </div>
-    </div>
+      <!-- 题型分类和时间 -->
 
-    <!-- 标签 -->
-    <el-row type="flex" class="row-bg" justify="space-between">
-      <div class="tagShow">
-        <el-tag
-          effect="plain"
-          size="small"
-          class="tagItem"
-          v-for="tag in question.notes"
-          :key="tag"
-        >
-          {{ tag }}
-        </el-tag>
-      </div>
-      <!-- 其他按钮 -->
-      <div class="otherEnter">
-        <!-- 编辑 -->
-        <el-button
-          class="first-button"
-          type="primary"
-          plain
-          icon="el-icon-edit"
-          circle
-          @click="dialogFormVisible = true"
-        ></el-button>
-        <el-dialog title="修改错题" :visible.sync="dialogFormVisible">
-          <ModifyQuestionVue :question="this.question"></ModifyQuestionVue>
-        </el-dialog>
+      <!-- 标签 -->
+      <el-row type="flex" class="row-bg" justify="space-between">
+        <div class="tagShow">
+          <el-tag
+            effect="plain"
+            size="small"
+            class="tagItem"
+            v-for="tag in question.notes"
+            :key="tag"
+          >
+            {{ tag }}
+          </el-tag>
+        </div>
+        <!-- 其他按钮 -->
+        <div class="otherEnter">
+          <!-- 编辑 -->
+          <el-button
+            class="first-button"
+            type="primary"
+            plain
+            icon="el-icon-edit"
+            circle
+            @click="dialogFormVisible = true"
+          ></el-button>
+          <el-dialog title="修改错题" :visible.sync="dialogFormVisible">
+            <ModifyQuestionVue :question="this.question"></ModifyQuestionVue>
+          </el-dialog>
 
-        <!-- 收藏 -->
-        <el-button
-          v-if="this.question.incollect == 0"
-          type="warning"
-          plain
-          icon="el-icon-star-off"
-          @click="like()"
-          circle
-        ></el-button>
-        <el-button
-          v-else
-          type="warning"
-          plain
-          icon="el-icon-star-on"
-          @click="like()"
-          circle
-        ></el-button>
-        <!-- 删除 -->
-        <el-button
-          type="danger"
-          plain
-          icon="el-icon-delete"
-          circle
-          @click="deletedata()"
-        ></el-button>
-      </div>
-    </el-row>
+          <!-- 收藏 -->
+          <el-button
+            v-if="this.question.incollect == 0"
+            type="warning"
+            plain
+            icon="el-icon-star-off"
+            @click="like()"
+            circle
+          ></el-button>
+          <el-button
+            v-else
+            type="warning"
+            plain
+            icon="el-icon-star-on"
+            @click="like()"
+            circle
+          ></el-button>
+          <!-- 删除 -->
+          <el-button
+            type="danger"
+            plain
+            icon="el-icon-delete"
+            circle
+            @click="deletedata()"
+          ></el-button>
+        </div>
+      </el-row>
 
-    <!-- 放大图片 -->
-    <div class="concer">
-      <span v-if="question.imagesrc.length > 1" @click="showPho()">pics</span>
-    </div>
-
+      <!-- 放大图片 -->
+     
     <imageViewer
       v-if="showPic === 'open'"
       :onClose="closePic"
@@ -256,10 +259,11 @@ a {
   color: #000;
 }
 
-.box-card {
-  width: 60%;
-  margin: 0 auto;
-  margin-bottom: 13px;
+.box-card1 {
+  border-radius: 20px;
+  width: 50%;
+  margin: 0 auto; 
+  margin-bottom: 28px;
   position: relative;
   overflow: hidden;
 }
@@ -267,11 +271,12 @@ a {
 .tagShow {
   width: 50px;
   display: flex;
+  float: left;
 }
 
 .subjectTag {
-  margin-right: 10px;
-  margin-bottom: 3px;
+  /* margin-right: 10px;
+  margin-bottom: 3px; */
 }
 
 .el-tag + .el-tag {
@@ -283,23 +288,30 @@ a {
 }
 
 .contentShow {
-  font-size: 21px;
+  font-size: 2px;
 }
-
+.centerItemright{
+  float: right;
+  left: 300px;
+}
 .centerItem {
-  margin: 10px 0;
+  float: left;
+  padding:8px;
   color: #c5c5c5;
-  margin-right: 25px;
+  /* margin-right: 25px; */
 }
 
 .centerShow {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .otherEnter {
-  width: 200px;
+  /* width: 200px; */
+  float: right;
+  left: 300px;
 }
 
 .concer {
@@ -310,6 +322,7 @@ a {
   right: -50px;
   transform: rotate(45deg);
 }
+
 .concer span {
   position: absolute;
   bottom: 0;
@@ -322,6 +335,7 @@ a {
   cursor: pointer;
   cursor: hand;
 }
+
 .first-button {
   margin-right: 10px;
 }

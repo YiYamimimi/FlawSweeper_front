@@ -1,28 +1,23 @@
 <template>
-  <div class="mainheart">
-    <el-card shadow="never">
-      <span class="box-title">数据统计</span>
-      <el-divider></el-divider>
-      <div class="chart-show">
-        <div class="chart-show-box">
-          <div class="chart-title">学习记录</div>
-          <LineChart :chartData="chartData.lineChartData"></LineChart>
+  <div>
+    
+    <div class="chart-show"><div class="chart-title">各类题目数量</div>
+      <div class="chart-show-box">
+        
+        <BarGrapeVue :chartData="chartData.barChartData" />
+      </div>
+
+      <div class="chart-show-two">
+        <div class="left-bottom">
+          <div class="chart-title">各科错题数量</div>
+          <PieChart :chartData="chartData.pieChartData"  style=" padding: 30px; padding-bottom: 1px; border-radius: 4px; box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;"></PieChart>
         </div>
-
-        <el-divider class="vertical-divider" direction="vertical"></el-divider>
-        <div class="chart-show-two">
-          <div>
-            <div class="chart-title">各类题目数量</div>
-            <BarGrapeVue :chartData="chartData.barChartData" />
-          </div>
-
-          <el-divider></el-divider>
-          <div>
-            <div class="chart-title">各科错题数量</div>
-            <PieChart :chartData="chartData.pieChartData"></PieChart>
-          </div>
-        </div></div
-    ></el-card>
+        <div class="right-bottom">
+          <div class="chart-title">学习记录</div>
+          <LineChart :chartData="chartData.lineChartData" style=" padding: 30px; padding-bottom: 1px; border-radius: 4px; box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;"></LineChart>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,7 +71,7 @@ export default {
       return dateArray;
     },
     getChartData(result) {
-      console.log("result",result);
+      console.log("result", result);
       //柱状图
       this.chartData.barChartData.bardata = result.barddata;
       //折线图
@@ -88,7 +83,7 @@ export default {
       ] = result.linedata;
       this.chartData.lineChartData.days = this.getSevenDate();
       //饼图
-      this.chartData.pieChartData.piedata = result.piedata;//[1,2,3,4]
+      this.chartData.pieChartData.piedata = result.piedata; //[1,2,3,4]
     },
   },
 
@@ -116,28 +111,68 @@ export default {
 
 .box-title {
   font-size: 24px;
-  font-weight:500;
+  font-weight: 500;
   font-family: Ali_Italic_Font;
+  margin-bottom: 38px;
 }
 
-.chart-show {
+/* .chart-show {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
+} */
 
 .chart-show-box {
-  width: 800px;
+  margin-top: 9px;
+  left: 132px;
+  padding: 10px;
+  /* width: 855px;
+  height: 368px; */
+  background: #ffffffff; /* white */
+  border-radius: 4px; /* border-m */
+  box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;
 }
 
 .chart-show-two {
-  width: 400px;
+  /* position: relative; */
+  /* width: 400px; */
+  margin-top: 20px;
+}
+.left-bottom {
+  /* position: absolute; */
+  padding-top: 20px;
+  /* left: 800px; */
+  float: left;
+  width: 452px;
+  /* height: 224px;  */
+  background: #ffffffff; /* white */
+ 
+}
+.border{
+  border-radius: 4px !important; /* border-m */
+  box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f !important;
+}
+.right-bottom {
+  /* position: absolute; */
+  /* top: 600px; */
+  padding: 20px;
+  /* left: 800px; */
+  float: right;
+  width: 522px;
+  /* height: 344px;  */
+  background: #ffffffff; /* white */
+ 
+}
+.chart-title1{
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .chart-title {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
+  padding-bottom: 20px;
+ 
 }
 
 .vertical-divider {

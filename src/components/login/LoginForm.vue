@@ -84,7 +84,7 @@ export default {
                 localStorage.setItem("token", "Bearer " + result.data.data.token);
 
                 //路由页面跳转
-                this.$router.push("/index");
+                this.$router.push("/homepage");
               } else {
                 alert(result.data.msg);
                 this.$refs[formName].resetFields(); //弹出错误然后清除表单数据

@@ -1,7 +1,7 @@
 <!-- 错题详情页 -->
 <template >
   <div class="tutu">
-    <router-link
+    <router-link class="return"
       :to="{ path: '/questionIndex', query: { id: question.classifyid } }"
     >
       <el-button id="back" icon="el-icon-arrow-left" ></el-button>
@@ -225,7 +225,10 @@ html {
   list-style: none;
   margin-top: 0;
 }
-
+/* .return>button{
+ 
+  position: absolute;
+} */
 .box-cardmini {
   width: 980px;
   height: 63px;
@@ -239,13 +242,47 @@ html {
   min-height: 100vh;
 
   margin: 0px;
-  background: url("../../assets/img/ima4.png") no-repeat;
+  
   /* background-color:#C7EDCC; */
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
   overflow: hidden;
-  background-size: cover;
+ 
 }
+.tutu::before{
+  content: '';
+  background-size:cover;
+          filter: blur(5px);
+          position: absolute;
+          top:0;
+          bottom:0;
+          left:0;
+          right:0;
+          z-index: -1;
+          background: url("../../assets/img/ima4.png") repeat-y;
+}
+.bg {
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  /* align-items: center; */
+  align-items: center;
+  justify-content: center;
+        }
+        .bg::before{         
+          content:'';
+          background: url('/src/assets/img/login_background.jpg') no-repeat;
+          background-size:cover;
+          filter: blur(5px);
+          position: absolute;
+          top:0;
+          bottom:0;
+          left:0;
+          right:0;
+          z-index: -1;
+        }
 #back {
   /* justify-content: center; */
   margin-top: 20px;

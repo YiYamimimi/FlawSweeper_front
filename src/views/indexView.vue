@@ -1,33 +1,42 @@
 <template>
   <el-container>
-    <el-header height="68px">
+    <el-header height="82px">
       <div class="header-left">
         <img src="../assets/img/log.png" alt="" />
         <div class="text">错题系统</div>
       </div>
       <div class="header-right">
         <div class="header-menu">
-          <el-button
-            type="primary"
-            icon="el-icon-edit"
-            circle
-            plain
-          ></el-button>
-        </div>
-        <div class="header-menu">
-          <router-link to="/index/addquestions">
+          <el-tooltip  effect="dark" content="添加错题" placement="bottom">
             <el-button
+              style=" background-color: rgba(109, 49, 237, 0.896);color: #fff;"
+              size="small"
               icon="el-icon-plus"
-              type="primary"
+              circle
               plain
               @click="dialogFormVisible = true"
-              >添加错题</el-button
-            >
+            ></el-button>
+          </el-tooltip>
+            <div style="font-size: 15px;color: rgba(109, 49, 237, 0.907);padding-top: 6px ;font-weight: 550;">添加错题</div>
             <el-dialog title="添加错题" :visible.sync="dialogFormVisible">
-              <addQuestionVue></addQuestionVue>
-            </el-dialog>
-          </router-link>
+            <addQuestionVue></addQuestionVue>
+          </el-dialog>
         </div>
+        <div class="header-menu">
+          <el-tooltip  effect="dark" content="重做错题" placement="bottom">
+          <el-button
+            style="line-height: 20px; top: 5px; padding-right: 20px;border-radius: 25px;background-color: rgba(109, 49, 237, 0.907);color: #fff;"
+            icon="el-icon-edit"
+            plain
+            @click="RepeatOptionVisible = true"
+            >重做错题</el-button
+          ></el-tooltip>
+         
+           <el-dialog :visible.sync="RepeatOptionVisible">
+            <RepeatOptionVue :RepeatOptionVisible.sync="RepeatOptionVisible"></RepeatOptionVue>
+          </el-dialog>
+        </div>
+        <!-- <el-avatar src="../assets/img/user.jpg"></el-avatar> -->
         <img src="../assets/img/user.jpg" alt="" />
       </div>
     </el-header>
@@ -37,7 +46,7 @@
           <el-col :span="24">
             <el-menu
               router
-              default-active="/index/"
+              default-active="/homepage/"
               class="el-menu-vertical-demo"
               @open="handleOpen"
               @close="handleClose"
@@ -45,7 +54,7 @@
               text-color="#000000"
               active-text-color=" #565D6DFF"
             >
-            <el-menu-item index="/homepage/">
+              <el-menu-item index="/homepage/">
                 <i
                   class="el-icon-house"
                   style="font-size: 23px; width: 25px; padding-top: 4px"
@@ -57,15 +66,9 @@
                   class="el-icon-house"
                   style="font-size: 23px; width: 25px; padding-top: 4px"
                 ></i>
-                <span slot="title">个人</span>
+                <span slot="title">个人页面</span>
               </el-menu-item>
-              <el-menu-item index="/index/addquestions">
-                <i
-                  class="el-icon-circle-plus-outline"
-                  style="font-size: 23px; width: 25px; padding-top: 4px"
-                ></i>
-                <span slot="title"> 添加错题</span>
-              </el-menu-item>
+            
               <el-menu-item index="/index/viewQuestions">
                 <i
                   class="el-icon-reading"
@@ -100,13 +103,17 @@
 </template>
 
 <script>
+import RepeatOptionVue from '@/components/Repeat/RepeatOption.vue';
 import addQuestionVue from "../components/add/addQuestions.vue";
+
 export default {
   components: {
     addQuestionVue,
+    RepeatOptionVue,
   },
   data() {
     return {
+      RepeatOptionVisible: false,
       dialogFormVisible: false,
     };
   },
@@ -142,7 +149,7 @@ html {
 /* header */
 .el-header {
   background-color: #ffffff;
-  line-height: 62px;
+  /* line-height: 62px; */
   color: #6d31edff;
   box-shadow: 0px 0px 1px #171a1f;
   /* color:#88b1da */
@@ -178,26 +185,28 @@ html {
 }
 .header-left > img {
   position: absolute;
-  top: 15px;
+  top: 18px;
 }
 .text {
   position: absolute;
-  top: 18px;
+  top: 22px;
   left: 75px;
   font-family: Poppins;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 900;
   line-height: 28px;
   color: #323743ff; /* neutral-700 */
 }
 .header-menu {
-  /* padding-top: 10px; */
+  padding-top: 10px;  
   padding-right: 25px;
 }
 .header-menu > button {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 100;
+  font-size: 16px;
+  font-weight: 500;
+  position:relative;
+  font-family: Poppins;
+  left: 9px;
 }
 .header-right {
   float: right;
@@ -207,8 +216,8 @@ html {
   padding: 2px;
 }
 .header-right > img {
-  /* margin-left: 15px; */
-  margin-top: 12px;
+  margin-left: 13px;
+  margin-top: 18px;
   width: 40px;
   height: 40px;
   border-radius: 45px;
