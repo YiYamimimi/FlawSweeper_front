@@ -68,7 +68,7 @@
           <span class="titles">错题解析:</span>
         </div>
         <el-divider></el-divider>
-        <div class="text item">
+        <div class="text1 item">
           <p>{{ question.answer }}</p>
         </div>
       </el-card>
@@ -102,7 +102,7 @@
         </div>
         <!-- 分割线 -->
         <el-divider></el-divider>
-        <div class="text item">
+        <div class="text1 item">
           <p>{{ question.analysis }}</p>
         </div>
       </el-card>
@@ -234,7 +234,7 @@ html {
   height: 63px;
   /* background: url("./imag1.jpg") no-repeat; */
   margin: 20px auto;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.951);
   border-radius: 30px;
 }
 
@@ -252,14 +252,16 @@ html {
 .tutu::before{
   content: '';
   background-size:cover;
-          filter: blur(5px);
+          /* filter: blur(5px); */
           position: absolute;
           top:0;
           bottom:0;
           left:0;
           right:0;
           z-index: -1;
-          background: url("../../assets/img/ima4.png") repeat-y;
+          background-color: rgba(230,230,250);
+          background: url("http://s38t0buqe.hn-bkt.clouddn.com/1141405.jpg") ;
+          background-size: cover;
 }
 .bg {
   min-height: 100vh;
@@ -267,14 +269,15 @@ html {
   height: 100%;
   display: flex;
   position: relative;
+  background: url('/src/assets/img/login_background.jpg') no-repeat;
+          background-size:cover;
   /* align-items: center; */
   align-items: center;
   justify-content: center;
         }
         .bg::before{         
           content:'';
-          background: url('/src/assets/img/login_background.jpg') no-repeat;
-          background-size:cover;
+         
           filter: blur(5px);
           position: absolute;
           top:0;
@@ -297,7 +300,7 @@ html {
   color: rgb(42, 41, 41);
 }
 
-.text {
+.text1 {
   font-size: 20px;
   color: black;
 }
@@ -322,7 +325,7 @@ html {
   /* height: 310px; */
   /* background: url("./imag1.jpg") no-repeat; */
   margin: 20px auto;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.951);
   border-radius: 30px;
 }
 
@@ -331,7 +334,7 @@ html {
   /* height: 340px; */
   /* background: url("./imag1.jpg") no-repeat; */
   margin: 20px auto;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.951);
   border-radius: 30px;
 }
 
@@ -340,7 +343,7 @@ html {
   /* height: 240px; */
   /* background: url("./imag1.jpg") no-repeat; */
   margin: 20px auto;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.951);
   border-radius: 30px;
 }
 

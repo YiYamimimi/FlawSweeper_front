@@ -23,9 +23,9 @@
     <div class="option">
       <div class="optionittle">指定错题类型（选择、非选择、随机）</div>
       <el-select class="optionitem" v-model="Option.types" placeholder="请选择">
-        <el-option label="随机" value="随机"></el-option>
-        <el-option label="选择" value="英语"></el-option>
-        <el-option label="随机" value="数学"></el-option>
+        <el-option label="随机" value="2"></el-option>
+        <el-option label="选择" value="1"></el-option>
+        <el-option label="非选择" value="0"></el-option>
       </el-select>
       <div style="font-family: KaiTi; padding-left: 5px">
         默认为随机，随机即为不指定
@@ -62,7 +62,7 @@ export default {
     return {
       Option: {
         classify: "随机",
-        types: "随机",
+        types: "2",
         time: 60,
       },
     };

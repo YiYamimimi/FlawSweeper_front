@@ -1,11 +1,10 @@
 <template>
   <div>
     
-    <div class="chart-show"><div class="chart-title">各类题目数量</div>
-      <div class="chart-show-box">
-        
-        <BarGrapeVue :chartData="chartData.barChartData" />
-      </div>
+    <div class="chart-show"><div class="chart-title">学习记录</div>
+      
+        <LineChart :chartData="chartData.lineChartData" style=" padding: 30px; padding-bottom: 1px; border-radius: 4px; box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;"></LineChart>
+  
 
       <div class="chart-show-two">
         <div class="left-bottom">
@@ -13,8 +12,10 @@
           <PieChart :chartData="chartData.pieChartData"  style=" padding: 30px; padding-bottom: 1px; border-radius: 4px; box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;"></PieChart>
         </div>
         <div class="right-bottom">
-          <div class="chart-title">学习记录</div>
-          <LineChart :chartData="chartData.lineChartData" style=" padding: 30px; padding-bottom: 1px; border-radius: 4px; box-shadow: 0px 0px 1px #494a4a36, 0px 0px 2px #23242474;"></LineChart>
+          <div class="chart-title">各类题目数量</div>
+          <div class="chart-show-box">  <BarGrapeVue :chartData="chartData.barChartData" /></div>
+        
+
         </div>
       </div>
     </div>

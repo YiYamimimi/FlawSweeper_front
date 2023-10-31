@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fa-bg">
     <!-- 搜索框 -->
     <div id="wrap">
       <div class="search-box1">
@@ -241,7 +241,9 @@ a {
 /* .router-link-active {
   text-decoration: none;
 } */
-
+.fa-bg{
+  background: url(../../assets/img/background2.png) ;
+}
 .box-card {
   width: 60%;
   margin: 0 auto;

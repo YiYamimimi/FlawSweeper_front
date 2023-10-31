@@ -280,8 +280,9 @@ export default {
       }
     },
     showPcitrure() {
+   
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
-      this.$data.showPic = "open";
+         console.log("2222223",this.form.imagesrc);this.$data.showPic = "open";
     },
     closePic() {
       this.$data.showPic = "close";

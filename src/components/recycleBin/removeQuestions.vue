@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="re-bg">
     <!-- 搜索框 -->
     <div id="wrap">
       <div class="search-box1">
@@ -222,7 +222,10 @@ a {
   text-decoration: none;
   color: #000;
 }
-
+.re-bg{
+  background: url(../../assets/img/background2.png) ;
+ 
+}
 /* .router-link-active {
   text-decoration: none;
 } */

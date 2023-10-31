@@ -26,31 +26,46 @@
     <el-main class="main">
       <el-tabs type="card">
         <el-tab-pane
-          v-for="(index,item) in itemlist"
-          :label="item+1"
-          :key="index + 1"
+          v-for="(item, index) in itemlist"
+          :label="index + 1"
+          :key="item + 1"
         >
           <div class="main-top">
-            <el-button type="primary">标签</el-button>
-            <el-button type="primary">类型</el-button>
-            <el-rate class="rate"
-          :value="4"
-          show-text
-          :texts="texts1"
-          disabled
-        >
-        </el-rate>
+           
+
+            <el-button type="primary">{{ subject(item.classifyid) }}</el-button>
+            <el-rate
+              class="rate"
+              :value="item.proficiency"
+              show-text
+              :texts="texts1"
+              disabled
+            >
+            </el-rate>
           </div>
           <div class="main-title">
             <div>
-              <div class="main-title-title">题目：</div>
-              <el-divider></el-divider>
+              <div class="main-title-title">
+                题目：<span style="font-family: serif; font-size: 20px">{{
+                  item.title1
+                }}</span>
+              </div>
+              <!-- <el-divider></el-divider> -->
               <div></div>
             </div>
-            <div>选择题</div>
-            <div>图片</div>
+            <div class="option">
+              <div v-for="e in item.title2" :key="e" style="text-indent: 0px;">
+               <p>{{ e }}</p>
+              </div>
+            </div>
+            <div v-show="item.imagesrc" class="img-right">
+              <img
+                :src="item.imagesrc"
+                style="height: 20%; width: 20%"
+                alt="域名下线或者冻结"
+              />
+            </div>
           </div>
-          
 
           <div class="main-writing">
             <el-input
@@ -77,8 +92,21 @@
             <div
               class="main-answer-item"
               v-show="value"
-              style="border-width: 1px; border: 0.1px solid"
-            ></div>
+              style="
+                border-width: 1px;
+                border: 0.1px solid;
+                border-color: rgba(220, 219, 219, 0.652); 
+padding: 22px;
+              "
+            >
+              <div class="clearfix">
+                <span class="main-title-title">错题解析:</span>
+              </div>
+              <el-divider></el-divider>
+              <div class="text2">
+                <p>{{ item.answer }}</p>
+              </div>
+            </div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -90,7 +118,9 @@ export default {
   data() {
     return {
       time: 0,
-      itemlist: [3, 2],
+      itemlist: [],
+      // list:["A.物理层与数据链路层的功能", "B.数据链路层与网络层的功能", "C.网络层与传输层的功能", "D.传输层与应用层的功能"],
+      imgdata: "",
       value: false,
       position: "bottom",
       texts1: ["不理解", "理解", "较熟悉", "很熟悉", "完全掌握"],
@@ -99,22 +129,42 @@ export default {
   //TODO:
   created() {
     let params = {};
-    params.classify = this.$route.query.classify;
-    params.types = this.$route.query.types;
+    params.classifyname = this.$route.query.classify;
+    params.titletype = +this.$route.query.types;
+    console.log("params.titletype", typeof params.titletype);
     this.time = this.$route.query.time;
     console.log(this.$route.query.time);
-
+    this.$axios({
+        method: "post",
+        url: "/question/getRedoQuestion",
+        data:params,
+      })
     // this.$axios
-    //   .get("/question/show" + "/" + params)
-    //   .then((res) => {
-    // this.itemlist
-
+    //   .post("/question/getRedoQuestion", {
+    //     params,
     //   })
+      .then((res) => {
+        this.itemlist = res.data.data;
+        console.log("this.itemlist", this.itemlist);
+        // this.itemlist.title2=["A.物理层与数据链路层的功能", "B.数据链路层与网络层的功能", "C.网络层与传输层的功能", "D.传输层与应用层的功能"]
+        // this.imgdata = res.data.data.imagesrc;
+      });
   }, //初始化渲染请求
   watch: {}, //监听数据的变化，接受父组件的参数为对象时，需要深拷贝
   methods: {
     Exit() {
       this.$router.push({ path: "/homepage" });
+    },
+    subject(subjectname) {
+      if (subjectname == "1") {
+        return "数学";
+      } else if (subjectname == "2") {
+        return "英语";
+      } else if (subjectname == "3") {
+        return "政治";
+      } else if (subjectname == "4") {
+        return "专业";
+      }
     },
   }, //方法
   computed: {}, //计算
@@ -126,6 +176,13 @@ body,
 html {
   height: 0;
   margin: 0;
+}
+.option{
+  /* display: flex; */
+}
+.img-right{
+  display: flex;
+  flex: right;
 }
 .el-main {
   height: 100%;
@@ -186,22 +243,21 @@ html {
   padding: 50px;
 }
 .main-top {
-  padding-top: 20px; 
+  padding-top: 20px;
 }
-.main-top>button{
-    margin-left: 10px;
+.tagItem {
+  margin-left: 10px;
 }
-.rate{
-   float: right;
-   margin-right: 20px;
+.rate {
+  float: right;
+  margin-right: 20px;
 }
 .main-title {
   margin-top: 20px;
   padding: 15px;
   font-size: 16px;
-  
+
   border-radius: 22px; /* border-xs */
- 
 }
 .main-title-title {
   font-family: STXingkai;
@@ -220,9 +276,6 @@ html {
   padding-top: 20px;
   /* width: 100%; */
   height: 147px;
-  border-color: #fffafa99;
-  border-radius: 5px;
-  margin-bottom: 20px;
 }
 .text1 {
   display: flex;
@@ -236,5 +289,8 @@ html {
   font-weight: 400;
   line-height: 36px;
   color: #171a1fff;
+}
+.text2{
+  font-size: 15px;
 }
 </style>

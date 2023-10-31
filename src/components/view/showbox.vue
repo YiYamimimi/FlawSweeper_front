@@ -107,7 +107,7 @@
       :onClose="closePic"
       :urlList="[this.pictureUrl]"
     >
-      a
+      
     </imageViewer>
   </el-card>
 </template>
@@ -222,8 +222,8 @@ export default {
     beforeModify() {},
     // 截断题目显示
     brief(content) {
-      if (content.length > 80) {
-        return content.substr(0, 80) + "...";
+      if (content.length > 20) {
+        return content.substr(0, 20) + "...";
       }
       return content;
     },
@@ -263,7 +263,7 @@ a {
   border-radius: 20px;
   width: 50%;
   margin: 0 auto; 
-  margin-bottom: 28px;
+  margin-bottom: 13px;
   position: relative;
   overflow: hidden;
 }

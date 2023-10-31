@@ -37,26 +37,28 @@
       </div>
     </div>
     <!-- 题目列表 -->
-    <showboxVue
-      v-for="question in questionList"
-      :key="question.questionid"
-      :question="question"
-    ></showboxVue>
+    <div class="boxshow">
+      <showboxVue
+        v-for="question in questionList"
+        :key="question.questionid"
+        :question="question"
+      ></showboxVue>
 
-    <!-- 分页组件 -->
-    <div class="footer">
-      <el-pagination
-        align="center"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="page"
-        :page-sizes="[6, 10, 15, 20]"
-        :page-size="limit"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
+      <!-- 分页组件 -->
+      <div class="footer">
+        <el-pagination
+          align="center"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="page"
+          :page-sizes="[5, 10, 15, 20]"
+          :page-size="limit"
+          background
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        >
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -232,7 +234,7 @@ export default {
   position: sticky;
   top: 0px;
   z-index: 1000;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 #back {
   display: flex;
@@ -252,11 +254,16 @@ a {
 /* .router-link-active {
   text-decoration: none;
 } */
-
+.boxshow{
+  padding-top: 29px;
+  background:url(https://pic.imgdb.cn/item/653fbffcc458853aefd8abda.jpg) repeat-y; 
+  background-size: 150%;
+    background-position-x: -250px;
+}
 .box-card {
   width: 60%;
   margin: 0 auto;
-  margin-bottom: 13px;
+  /* margin-bottom: 3px; */
 }
 
 .tagShow {
@@ -303,7 +310,8 @@ a {
   position: sticky;
   bottom: 2px;
   z-index: 0;
-  margin-bottom: 70px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 .search-box1 {
   display: flex;

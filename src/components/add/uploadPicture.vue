@@ -1,5 +1,6 @@
 <template>
-  <el-upload
+
+<el-upload 
     action="http://localhost:8082/question/image"
     :on-success="handleSuccess"
     :show-file-list="false"
@@ -26,8 +27,9 @@ export default {
   methods: {
     // eslint-disable-next-line no-unused-vars
     handleSuccess(response, file, fileList) {
-      console.log(response);
+      console.log("response",response);
       this.pictureUrl = response;
+      console.log("this.pictureUrl",this.pictureUrl);
     },
   },
   created() {
