@@ -7,8 +7,9 @@
         ref="theForm"
         :model="form"
         label-width="80px"
+        :rules="rules" 
       >
-        <el-form-item label="题型">
+        <el-form-item label="题型" prop="types">
           <el-select
             class="item1"
             v-model="typeOfquestion"
@@ -18,7 +19,7 @@
             <el-option label="大题" value="大题"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="学科">
+        <el-form-item label="学科" prop="subject">
           <el-select class="item1" v-model="classify" placeholder="请选择标签">
             <el-option label="英语" value="英语"></el-option>
             <el-option label="数学" value="数学"></el-option>
@@ -61,24 +62,19 @@
             </el-rate>
           </div>
         </el-form-item>
-        <el-form-item style="margin-bottom: 40px" label="题目描述">
+        <el-form-item style="margin-bottom: 40px" label="题目描述" prop="description">
           <el-input
             class="inputItem1"
             type="textarea"
-            :autosize="{ minRows: 8, maxRows: 8 }"
+            :autosize="{ minRows: 6.8, maxRows: 6.8 }"
             v-model="form.title1"
           ></el-input>
         </el-form-item>
         <!-- 查看图片 -->
-        <el-form-item class="upLoadPic">
-          <uploadPic ref="uploadPicRef"></uploadPic>
-          <button
-            style="color: white; background-color: #409eff; border: hidden"
-            @click="showPcitrure()"
-          >
-            查看图片
-          </button>
-        </el-form-item>
+          <el-form-item class="upLoadPic">
+            <uploadPic ref="uploadPicRef"></uploadPic>
+            
+          </el-form-item>
         <!-- 选项 -->
         <el-form-item
           class="chooseItem"
@@ -149,7 +145,7 @@
           <el-button @click="resetForm()">重置</el-button>
         </div>
       </el-form>
-      <div>
+      <div class="picture">
         <imageViewer
           v-if="showPic === 'open'"
           :onClose="closePic"
@@ -192,7 +188,21 @@ export default {
       typeOfquestion: "",
       classify: "",
       texts: ["不理解", "理解", "较熟悉", "很熟悉", "完全掌握"],
+
+      rules: {
+          
+          types: [
+            { required: true, message: '请选择题型', trigger: 'change' }
+          ],
+          subject: [
+            {  required: true, message: '请选择学科', trigger: 'change' }
+          ],
+          description: [
+            { required: true, message: '请填写题目描述', trigger: 'blur' }
+          ]
+        }
     };
+    
   },
   methods: {
     onSubmit() {
@@ -216,6 +226,8 @@ export default {
       }
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
       this.form.questiontime = new Date();
+      this.$refs[form].validate((valid) => {
+          if (valid) {
       this.$axios({
         method: "post",
         url: "/question/addQuestion",
@@ -237,6 +249,7 @@ export default {
           console.log(error.msg);
           this.errorMsg();
         });
+      }})
     },
     successMsg() {
       this.$message("添加成功。");
@@ -282,7 +295,8 @@ export default {
     showPcitrure() {
    
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
-         console.log("2222223",this.form.imagesrc);this.$data.showPic = "open";
+         console.log("2222223",this.form.imagesrc);
+         this.$data.showPic = "open";
     },
     closePic() {
       this.$data.showPic = "close";
@@ -296,13 +310,16 @@ export default {
   display: flex;
   align-items: center;
 }
+.picture{
+  z-index: 200;
+}
 .mainDiv {
   /* width: 1500px; */
   display: flex;
   justify-content: center;
 }
 .inputItem1 {
-  width: 440px;
+  width: 435px;
   height: 170px;
   /* border: solid 1px */
 }

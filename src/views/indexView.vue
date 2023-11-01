@@ -7,9 +7,9 @@
       </div>
       <div class="header-right">
         <div class="header-menu">
-          <el-tooltip  effect="dark" content="添加错题" placement="bottom">
+          <el-tooltip effect="dark" content="添加错题" placement="bottom">
             <el-button
-              style=" background-color: rgba(109, 49, 237, 0.896);color: #fff;"
+              style="background-color: rgba(109, 49, 237, 0.896); color: #fff"
               size="small"
               icon="el-icon-plus"
               circle
@@ -17,23 +17,46 @@
               @click="dialogFormVisible = true"
             ></el-button>
           </el-tooltip>
-            <div style="font-size: 15px;color: rgba(109, 49, 237, 0.907);padding-top: 6px ;font-weight: 550;">添加错题</div>
-            <el-dialog title="添加错题" :visible.sync="dialogFormVisible">
+          <div
+            style="
+              font-size: 15px;
+              color: rgba(109, 49, 237, 0.907);
+              padding-top: 6px;
+              font-weight: 550;
+            "
+          >
+            添加错题
+          </div>
+          <el-dialog
+            title="添加错题"
+            :visible.sync="dialogFormVisible"
+            :close-on-click-modal="false"
+          >
             <addQuestionVue></addQuestionVue>
           </el-dialog>
         </div>
         <div class="header-menu">
-          <el-tooltip  effect="dark" content="重做错题" placement="bottom">
-          <el-button
-            style="line-height: 20px; top: 5px; padding-right: 20px;border-radius: 25px;background-color: rgba(109, 49, 237, 0.907);color: #fff;"
-            icon="el-icon-edit"
-            plain
-            @click="RepeatOptionVisible = true"
-            >重做错题</el-button
-          ></el-tooltip>
-         
-           <el-dialog :visible.sync="RepeatOptionVisible">
-            <RepeatOptionVue :RepeatOptionVisible.sync="RepeatOptionVisible"></RepeatOptionVue>
+          <el-tooltip effect="dark" content="重做错题" placement="bottom">
+            <el-button
+              style="
+                line-height: 20px;
+                top: 5px;
+                padding-right: 20px;
+                border-radius: 25px;
+                background-color: rgba(109, 49, 237, 0.907);
+                color: #fff;
+              "
+              icon="el-icon-edit"
+              plain
+              @click="RepeatOptionVisible = true"
+              >重做错题</el-button
+            ></el-tooltip
+          >
+
+          <el-dialog :visible.sync="RepeatOptionVisible">
+            <RepeatOptionVue
+              :RepeatOptionVisible.sync="RepeatOptionVisible"
+            ></RepeatOptionVue>
           </el-dialog>
         </div>
         <!-- <el-avatar src="../assets/img/user.jpg"></el-avatar> -->
@@ -68,7 +91,7 @@
                 ></i>
                 <span slot="title">个人页面</span>
               </el-menu-item>
-            
+
               <el-menu-item index="/index/viewQuestions">
                 <i
                   class="el-icon-reading"
@@ -103,7 +126,7 @@
 </template>
 
 <script>
-import RepeatOptionVue from '@/components/Repeat/RepeatOption.vue';
+import RepeatOptionVue from "@/components/Repeat/RepeatOption.vue";
 import addQuestionVue from "../components/add/addQuestions.vue";
 
 export default {
@@ -198,13 +221,13 @@ html {
   color: #323743ff; /* neutral-700 */
 }
 .header-menu {
-  padding-top: 10px;  
+  padding-top: 10px;
   padding-right: 25px;
 }
 .header-menu > button {
   font-size: 16px;
   font-weight: 500;
-  position:relative;
+  position: relative;
   font-family: Poppins;
   left: 9px;
 }

@@ -52,7 +52,7 @@ html {
   height: 100%;
   display: flex;
   /* align-items: center; */
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   background: url("/src/assets/img/login_background.jpg") no-repeat;
   background-size: cover;
@@ -63,7 +63,7 @@ html {
 }
 .card_box {
   width: 600px;
-  margin-top: 320px;
+  /* margin-top: 320px; */
   /* 半透明 */
   background-color: rgba(255, 255, 255, 0.7);
 }

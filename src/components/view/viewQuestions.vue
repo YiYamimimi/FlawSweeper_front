@@ -247,22 +247,9 @@ html {
   /* height: 100%;
   width: 100%; */
   overflow: hidden;
- 
+  background: url("http://s38t0buqe.hn-bkt.clouddn.com/1141405.jpg") repeat-y;
 }
-.tutu::before{
-  content: '';
-  background-size:cover;
-          /* filter: blur(5px); */
-          position: absolute;
-          top:0;
-          bottom:0;
-          left:0;
-          right:0;
-          z-index: -1;
-          background-color: rgba(230,230,250);
-          background: url("http://s38t0buqe.hn-bkt.clouddn.com/1141405.jpg") ;
-          background-size: cover;
-}
+/* . */
 .bg {
   min-height: 100vh;
   width: 100%;

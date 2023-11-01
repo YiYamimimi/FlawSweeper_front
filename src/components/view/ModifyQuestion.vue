@@ -6,6 +6,7 @@
       ref="theForm"
       :model="form"
       label-width="80px"
+      :rules="rules"
     >
       <el-form-item label="题型">
         <el-select
@@ -60,11 +61,11 @@
           </el-rate>
         </div>
       </el-form-item>
-      <el-form-item style="margin-bottom: 40px" label="题目描述">
+      <el-form-item style="margin-bottom: 40px" label="题目描述" prop="description">
         <el-input
           class="inputItem1"
           type="textarea"
-          :autosize="{ minRows: 8, maxRows: 8 }"
+          :autosize="{ minRows: 6.8, maxRows: 6.8 }"
           v-model="form.title1"
         ></el-input>
       </el-form-item>
@@ -186,6 +187,11 @@ export default {
       inputTagValue: "",
       classify: "", //学科分类
       texts: ["不理解", "理解", "较熟悉", "很熟悉", "完全掌握"],
+      rules:{
+        description: [
+            { required: true, message: '请填写题目描述', trigger: 'blur' }
+          ]
+      }
     };
   },
   created() {
@@ -231,6 +237,8 @@ export default {
     },
     // 确认修改
     onSubmit() {
+      this.$refs[form].validate((valid) => {
+          if (valid) {
       // 数据处理
       if (this.typeOfquestion === "选择题") {
         this.form.titletype = 1;
@@ -251,7 +259,7 @@ export default {
       }
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
       this.form.questiontime = new Date();
-
+    
       // console.log(this.$data.form);
       this.$axios({
         method: "post",
@@ -277,6 +285,7 @@ export default {
           console.log(error.msg);
           this.errorMsg();
         });
+      }})
     },
     // 操作结果
     successMsg() {

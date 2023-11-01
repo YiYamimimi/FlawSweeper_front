@@ -1,9 +1,9 @@
 <template>
-
-<el-upload 
+  <el-upload
     action="http://localhost:8082/question/image"
     :on-success="handleSuccess"
     :show-file-list="false"
+    :on-error="handleError"
   >
     <div class="upload_picture">
       <i v-if="!pictureUrl" class="el-icon-plus"></i>
@@ -27,11 +27,15 @@ export default {
   methods: {
     // eslint-disable-next-line no-unused-vars
     handleSuccess(response, file, fileList) {
-      console.log("response",response);
-      this.pictureUrl = response;
-      console.log("this.pictureUrl",this.pictureUrl);
+      console.log("response", response);
+      if (response) {
+        this.$message.success("上传成功");
+        this.pictureUrl = response;
+      } else this.$message.error("上传失败");
+      console.log("this.pictureUrl", this.pictureUrl);
     },
   },
+
   created() {
     if (this.picturl != null) {
       this.pictureUrl = this.picturl;
@@ -47,6 +51,7 @@ export default {
   height: 150px;
   border-radius: 4px;
   border: 1px solid;
+  /* z-index: 200; */
 }
 .el-icon-plus {
   position: absolute;
