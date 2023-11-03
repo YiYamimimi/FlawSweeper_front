@@ -4,23 +4,24 @@
       <el-form
         class="form"
         :inline="true"
-        ref="theForm"
+        ref="form"
         :model="form"
         label-width="80px"
-        :rules="rules" 
+        :rules="rules"
       >
-        <el-form-item label="题型" prop="types">
+        <el-form-item label="题型" prop="typeOfquestion">
           <el-select
             class="item1"
-            v-model="typeOfquestion"
+            v-model="form.typeOfquestion"
             placeholder="选择题型"
           >
             <el-option label="选择题" value="选择题"></el-option>
             <el-option label="大题" value="大题"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="学科" prop="subject">
-          <el-select class="item1" v-model="classify" placeholder="请选择标签">
+
+        <el-form-item label="学科" prop="classify">
+          <el-select class="item1" v-model="form.classify" placeholder="请选择标签">
             <el-option label="英语" value="英语"></el-option>
             <el-option label="数学" value="数学"></el-option>
             <el-option label="政治" value="政治"></el-option>
@@ -62,7 +63,12 @@
             </el-rate>
           </div>
         </el-form-item>
-        <el-form-item style="margin-bottom: 40px" label="题目描述" prop="description">
+
+        <el-form-item
+          style="margin-bottom: 40px"
+          label="题目描述"
+          prop="title1"
+        >
           <el-input
             class="inputItem1"
             type="textarea"
@@ -71,14 +77,13 @@
           ></el-input>
         </el-form-item>
         <!-- 查看图片 -->
-          <el-form-item class="upLoadPic">
-            <uploadPic ref="uploadPicRef"></uploadPic>
-            
-          </el-form-item>
+        <el-form-item class="upLoadPic">
+          <uploadPic :picturl="form.imagesrc" ref="uploadPicRef"></uploadPic>
+        </el-form-item>
         <!-- 选项 -->
         <el-form-item
           class="chooseItem"
-          v-if="typeOfquestion === '选择题'"
+          v-if="form.typeOfquestion === '选择题'"
           label="题目选项"
         >
           <el-radio-group v-model="choice">
@@ -90,7 +95,7 @@
         </el-form-item>
         <el-form-item
           class="choiceItem"
-          v-if="typeOfquestion === '选择题'"
+          v-if="form.typeOfquestion === '选择题'"
           label="选项内容"
         >
           <el-input
@@ -139,7 +144,9 @@
           ></el-input>
         </el-form-item>
         <div class="buttonItem">
-          <el-button type="primary" @click="handleInputChoice(), onSubmit()"
+          <el-button
+            type="primary"
+            @click="handleInputChoice(), onSubmit('form')"
             >添加错题</el-button
           >
           <el-button @click="resetForm()">重置</el-button>
@@ -154,19 +161,44 @@
       </div>
     </el-card>
   </div>
-</template>
+</template> 
 
 <script>
+import uploadPic from '@/components/add/uploadPicture.vue';
 export default {
+  
   components: {
-    uploadPic: () => import("@/components/add/uploadPicture.vue"),
-    imageViewer: () => import("element-ui/packages/image/src/image-viewer.vue"),
+    uploadPic,
   },
   data() {
+    var validatetypes = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请选择题型"));
+      } else {
+        callback();
+      }
+    };
+    var validatesubject = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请选择科目"));
+      } else {
+        callback();
+      }
+    };
+    var validatedescription = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请填写题目描述"));
+      } else {
+        console.log('value',value);
+        callback();
+      }
+    };
     return {
+     
       form: {
         titletype: "", //题型
         classifyid: "", //学科
+        classify: "",
         notes: [], //标签
         title1: "", //题目
         title2: [], //选项
@@ -175,6 +207,7 @@ export default {
         questiontime: "",
         imagesrc: "",
         proficiency: 1,
+        typeOfquestion: "",
       },
       choice: 1,
       choiceContent: "",
@@ -191,43 +224,45 @@ export default {
 
       rules: {
           
-          types: [
-            { required: true, message: '请选择题型', trigger: 'change' }
+          typeOfquestion: [
+              {validator:validatetypes, trigger: 'change' }
+            ],
+          classify: [
+            { validator: validatesubject,trigger: 'change' }
           ],
-          subject: [
-            {  required: true, message: '请选择学科', trigger: 'change' }
-          ],
-          description: [
-            { required: true, message: '请填写题目描述', trigger: 'blur' }
+          title1: [
+            { validator:validatedescription, trigger: 'blur' }
           ]
         }
     };
     
   },
   methods: {
-    onSubmit() {
+    onSubmit(Form) {
+      this.$refs[Form].validate((valid) => {
+   
+          if (valid) {   console.log('5555555');
       console.log("提交题目...");
-      if (this.typeOfquestion === "选择题") {
+      if (this.form.typeOfquestion === "选择题") {
         this.form.titletype = 1;
       } else {
         this.form.titletype = 0;
       }
-      if (this.classify === "数学") {
+      if (this.form.classify === "数学") {
         this.form.classifyid = 1;
       }
-      if (this.classify === "英语") {
+      if (this.form.classify === "英语") {
         this.form.classifyid = 2;
       }
-      if (this.classify === "政治") {
+      if (this.form.classify === "政治") {
         this.form.classifyid = 3;
       }
-      if (this.classify === "专业课") {
+      if (this.form.classify === "专业课") {
         this.form.classifyid = 4;
-      }
+      } 
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
       this.form.questiontime = new Date();
-      this.$refs[form].validate((valid) => {
-          if (valid) {
+    
       this.$axios({
         method: "post",
         url: "/question/addQuestion",
@@ -259,13 +294,16 @@ export default {
     },
     resetForm() {
       this.form.title1 = "";
-      this.classify = "";
-      this.typeOfquestion = "";
+      this.form.classify = "";
+      this.form.typeOfquestion = "";
       this.form.notes = [];
       this.form.title2 = [];
       this.form.analysis = "";
       this.form.answer = "";
-      this.form.imagesrc = "url1";
+      this.$refs.uploadPicRef.resetForm1()
+      this.form.imagesrc = "";
+      this.form.proficiency = 1;
+      this.$message.success("重置成功");
     },
     handleClose(tag) {
       this.form.notes.splice(this.form.notes.indexOf(tag), 1);
@@ -285,7 +323,7 @@ export default {
     },
     handleInputChoice() {
       this.form.title2 = [];
-      if (this.typeOfquestion === "选择题") {
+      if (this.form.typeOfquestion === "选择题") {
         this.form.title2.push(this.choiceA);
         this.form.title2.push(this.choiceB);
         this.form.title2.push(this.choiceC);
@@ -301,6 +339,7 @@ export default {
     closePic() {
       this.$data.showPic = "close";
     },
+   
   },
 };
 </script>
@@ -310,7 +349,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.picture{
+.picture {
   z-index: 200;
 }
 .mainDiv {

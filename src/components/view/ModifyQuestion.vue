@@ -61,7 +61,7 @@
           </el-rate>
         </div>
       </el-form-item>
-      <el-form-item style="margin-bottom: 40px" label="题目描述" prop="description">
+      <el-form-item style="margin-bottom: 40px" label="题目描述" prop="title1">
         <el-input
           class="inputItem1"
           type="textarea"
@@ -137,7 +137,7 @@
         ></el-input>
       </el-form-item>
       <div class="buttonItem">
-        <el-button type="primary" @click="handleInputChoice(), onSubmit()"
+        <el-button type="primary" @click="handleInputChoice(), onSubmit('theForm')"
           >确认修改</el-button
         >
       </div>
@@ -188,7 +188,7 @@ export default {
       classify: "", //学科分类
       texts: ["不理解", "理解", "较熟悉", "很熟悉", "完全掌握"],
       rules:{
-        description: [
+        title1: [
             { required: true, message: '请填写题目描述', trigger: 'blur' }
           ]
       }
@@ -236,9 +236,8 @@ export default {
       this.form.proficiency = this.question.proficiency;
     },
     // 确认修改
-    onSubmit() {
-      this.$refs[form].validate((valid) => {
-          if (valid) {
+    onSubmit(theForm) {
+  
       // 数据处理
       if (this.typeOfquestion === "选择题") {
         this.form.titletype = 1;
@@ -259,7 +258,8 @@ export default {
       }
       this.form.imagesrc = this.$refs.uploadPicRef.pictureUrl;
       this.form.questiontime = new Date();
-    
+      this.$refs[theForm].validate((valid) => {
+          if (valid) {
       // console.log(this.$data.form);
       this.$axios({
         method: "post",

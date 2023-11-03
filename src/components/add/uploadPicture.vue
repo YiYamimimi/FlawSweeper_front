@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'uploadPic', 
   props: {
     picturl: {
       type: String,
@@ -29,17 +30,22 @@ export default {
     handleSuccess(response, file, fileList) {
       console.log("response", response);
       if (response) {
-        this.$message.success("上传成功");
+        this.$message.success("上传成功,请等待加载");
         this.pictureUrl = response;
       } else this.$message.error("上传失败");
       console.log("this.pictureUrl", this.pictureUrl);
     },
+    resetForm1(){
+    console.log(77777);
+    this.pictureUrl=''
   },
-
+  },
+  
   created() {
     if (this.picturl != null) {
       this.pictureUrl = this.picturl;
     }
+    
   },
 };
 </script>
